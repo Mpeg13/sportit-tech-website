@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест мобильного меню</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            background: #111827;
+            border-radius: 40px;
+            padding: 20px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem;
+            z-index: 1000;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #2563eb;
+        }
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #1f2937;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .menu-toggle:hover {
+            background: #f9fafb;
+        }
+        .nav-links {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            padding: 2rem 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .nav-links.active {
+            display: flex;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 1.125rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a:last-child {
+            border-bottom: none;
+        }
+        .nav-links a:hover {
+            color: #2563eb;
+            padding-left: 0.5rem;
+        }
+        .nav-links a::after {
+            content: '→';
+            color: #2563eb;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .nav-links a:hover::after {
+            opacity: 1;
+        }
+        .nav-cta {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            border: 2px solid transparent;
+            cursor: pointer;
+            width: 100%;
+            gap: 0.5rem;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        .content {
+            padding: 5rem 1rem 1rem;
+            color: #6b7280;
+            text-align: center;
+        }
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #2563eb;
+        }
+        .instructions h3 {
+            color: #2563eb;
+            margin-top: 0;
+        }
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .test-btn {
+            padding: 10px 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .test-btn:hover {
+            background: #1d4ed8;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="test-container">
+        <h1>📱 Тест мобильного меню</h1>
+        
+        <div class="instructions">
+            <h3>Что проверяем:</h3>
+            <ul>
+                <li>✅ Анимация открытия/закрытия</li>
+                <li>✅ Стрелочки при наведении</li>
+                <li>✅ CTA кнопка в меню</li>
+                <li>✅ Блокировка скролла при открытом меню</li>
+                <li>✅ Закрытие при клике вне меню</li>
+                <li>✅ Эффект блюра (backdrop-filter)</li>
+            </ul>
+        </div>
+        
+        <div class="phone-frame">
+            <div class="phone-screen">
+                <!-- Навигация -->
+                <nav class="navbar">
+                    <div class="nav-content">
+                        <a href="#" class="logo">
+                            <span class="logo-text">Sport IT Tech</span>
+                            <span class="logo-tagline">Платформа геймификации</span>
+                        </a>
+                        <button class="menu-toggle" id="menuToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </nav>
+                
+                <!-- Меню -->
+                <div class="nav-links" id="navLinks">
+                    <a href="#for-whom"><span>Для кого</span></a>
+                    <a href="#how-it-works"><span>Как работает</span></a>
+                    <a href="#cases"><span>Кейсы</span></a>
+                    <a href="#advantages"><span>Преимущества</span></a>
+                    <div class="nav-cta">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-play-circle"></i> Запросить демо-турнир
+                        </a>
+                        <p style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                            Ответим в течение 24 часов
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Контент -->
+                <div class="content">
+                    <h2>Sport IT Tech</h2>
+                    <p>Нажмите на бургер-меню в правом верхнем углу, чтобы открыть навигацию.</p>
+                    <p>Меню должно плавно появляться с анимацией.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-buttons">
+            <button class="test-btn" onclick="toggleMenu()">Открыть/Закрыть меню</button>
+            <button class="test-btn" onclick="resetTest()">Сбросить</button>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="http://155.212.219.246:8080/" style="color: #2563eb; text-decoration: none; font-weight: 600;">
+                <i class="fas fa-external-link-alt"></i> Перейти на основной сайт
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        function toggleMenu() {
+            const isActive = navLinks.classList.toggle('active');
+            menuToggle.innerHTML = isActive 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+            
+            // Блокировка скролла
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+        
+        function resetTest() {
+            navLinks.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        }
+        
+        menuToggle.addEventListener('click', toggleMenu);
+        
+        // Закрытие при клике вне меню
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active') && 
+                !navLinks.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                resetTest();
+            }
+        });
+        
+        // Закрытие при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', resetTest);
+        });
+    </script>
+</body>
+</html>

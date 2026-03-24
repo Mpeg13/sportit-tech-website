@@ -1,0 +1,121 @@
+/* ===== COOKIES УВЕДОМЛЕНИЕ ===== */
+
+/* Основной контейнер */
+.cookies-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    color: white;
+    padding: 20px;
+    z-index: 10000;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(59, 130, 246, 0.3);
+    display: none; /* По умолчанию скрыто */
+}
+
+.cookies-popup.active {
+    display: block;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Контент уведомления */
+.cookies-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (min-width: 768px) {
+    .cookies-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+}
+
+/* Текст уведомления */
+.cookies-text {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #d1d5db;
+}
+
+.cookies-text strong {
+    color: white;
+    font-weight: 600;
+}
+
+/* Кнопка принятия */
+.cookies-accept-btn {
+    flex-shrink: 0;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.cookies-accept-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.cookies-accept-btn:active {
+    transform: translateY(0);
+}
+
+/* Для мобильных */
+@media (max-width: 767px) {
+    .cookies-popup {
+        padding: 15px;
+    }
+    
+    .cookies-text {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .cookies-accept-btn {
+        width: 100%;
+        padding: 14px;
+    }
+}
+
+/* Анимация закрытия */
+.cookies-popup.closing {
+    animation: slideDown 0.3s ease-in forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
